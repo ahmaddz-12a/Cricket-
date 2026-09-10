@@ -1,0 +1,240 @@
+import { Match, Team } from '../types';
+
+export const DEFAULT_TEAMS: Team[] = [
+  {
+    id: 'team-ind',
+    name: 'India Kings',
+    shortName: 'IND',
+    badgeColor: '#0284c7', // Sky blue
+    players: [
+      { id: 'p1', name: 'Rohit Sharma', role: 'batsman', isCaptain: true },
+      { id: 'p2', name: 'Shubman Gill', role: 'batsman' },
+      { id: 'p3', name: 'Virat Kohli', role: 'batsman' },
+      { id: 'p4', name: 'Suryakumar Yadav', role: 'batsman' },
+      { id: 'p5', name: 'Rishabh Pant', role: 'wicketkeeper', isWicketKeeper: true },
+      { id: 'p6', name: 'Hardik Pandya', role: 'allrounder' },
+      { id: 'p7', name: 'Ravindra Jadeja', role: 'allrounder' },
+      { id: 'p8', name: 'Axar Patel', role: 'allrounder' },
+      { id: 'p9', name: 'Kuldeep Yadav', role: 'bowler' },
+      { id: 'p10', name: 'Jasprit Bumrah', role: 'bowler' },
+      { id: 'p11', name: 'Mohammed Siraj', role: 'bowler' },
+    ],
+  },
+  {
+    id: 'team-aus',
+    name: 'Australia Thunder',
+    shortName: 'AUS',
+    badgeColor: '#eab308', // Gold
+    players: [
+      { id: 'p12', name: 'Travis Head', role: 'batsman' },
+      { id: 'p13', name: 'David Warner', role: 'batsman' },
+      { id: 'p14', name: 'Mitchell Marsh', role: 'allrounder', isCaptain: true },
+      { id: 'p15', name: 'Glenn Maxwell', role: 'allrounder' },
+      { id: 'p16', name: 'Marcus Stoinis', role: 'allrounder' },
+      { id: 'p17', name: 'Josh Inglis', role: 'wicketkeeper', isWicketKeeper: true },
+      { id: 'p18', name: 'Tim David', role: 'batsman' },
+      { id: 'p19', name: 'Pat Cummins', role: 'bowler' },
+      { id: 'p20', name: 'Mitchell Starc', role: 'bowler' },
+      { id: 'p21', name: 'Adam Zampa', role: 'bowler' },
+      { id: 'p22', name: 'Josh Hazlewood', role: 'bowler' },
+    ],
+  },
+  {
+    id: 'team-eng',
+    name: 'England Titans',
+    shortName: 'ENG',
+    badgeColor: '#ef4444', // Red
+    players: [
+      { id: 'p23', name: 'Jos Buttler', role: 'wicketkeeper', isCaptain: true, isWicketKeeper: true },
+      { id: 'p24', name: 'Phil Salt', role: 'batsman' },
+      { id: 'p25', name: 'Will Jacks', role: 'batsman' },
+      { id: 'p26', name: 'Jonny Bairstow', role: 'batsman' },
+      { id: 'p27', name: 'Harry Brook', role: 'batsman' },
+      { id: 'p28', name: 'Liam Livingstone', role: 'allrounder' },
+      { id: 'p29', name: 'Moeen Ali', role: 'allrounder' },
+      { id: 'p30', name: 'Sam Curran', role: 'allrounder' },
+      { id: 'p31', name: 'Jofra Archer', role: 'bowler' },
+      { id: 'p32', name: 'Adil Rashid', role: 'bowler' },
+      { id: 'p33', name: 'Mark Wood', role: 'bowler' },
+    ],
+  },
+  {
+    id: 'team-sa',
+    name: 'South Africa Proteas',
+    shortName: 'SA',
+    badgeColor: '#10b981', // Emerald
+    players: [
+      { id: 'p34', name: 'Quinton de Kock', role: 'wicketkeeper', isWicketKeeper: true },
+      { id: 'p35', name: 'Reeza Hendricks', role: 'batsman' },
+      { id: 'p36', name: 'Aiden Markram', role: 'batsman', isCaptain: true },
+      { id: 'p37', name: 'Heinrich Klaasen', role: 'batsman' },
+      { id: 'p38', name: 'David Miller', role: 'batsman' },
+      { id: 'p39', name: 'Tristan Stubbs', role: 'batsman' },
+      { id: 'p40', name: 'Marco Jansen', role: 'allrounder' },
+      { id: 'p41', name: 'Keshav Maharaj', role: 'bowler' },
+      { id: 'p42', name: 'Kagiso Rabada', role: 'bowler' },
+      { id: 'p43', name: 'Anrich Nortje', role: 'bowler' },
+      { id: 'p44', name: 'Tabraiz Shamsi', role: 'bowler' },
+    ],
+  },
+];
+
+export const INITIAL_MATCHES: Match[] = [
+  {
+    id: 'match-live-1',
+    title: 'T20 Championship Final',
+    venue: 'Kensington Oval, Bridgetown',
+    format: 'T20',
+    totalOvers: 20,
+    team1: DEFAULT_TEAMS[0], // IND
+    team2: DEFAULT_TEAMS[3], // SA
+    tossWinnerId: 'team-ind',
+    tossDecision: 'bat',
+    status: 'live',
+    currentInningsIndex: 1, // SA batting (2nd innings)
+    innings: [
+      {
+        teamId: 'team-ind',
+        teamName: 'India Kings',
+        runs: 176,
+        wickets: 7,
+        legalBalls: 120,
+        batting: [
+          { playerId: 'p1', name: 'Rohit Sharma', runs: 9, balls: 5, fours: 2, sixes: 0, isOut: true, dismissal: { type: 'caught', bowlerName: 'Keshav Maharaj', fielderName: 'Klaasen', description: 'c Klaasen b Maharaj' } },
+          { playerId: 'p2', name: 'Shubman Gill', runs: 12, balls: 8, fours: 2, sixes: 0, isOut: true, dismissal: { type: 'caught', bowlerName: 'Rabada', fielderName: 'Jansen', description: 'c Jansen b Rabada' } },
+          { playerId: 'p3', name: 'Virat Kohli', runs: 76, balls: 59, fours: 6, sixes: 2, isOut: true, dismissal: { type: 'caught', bowlerName: 'Jansen', fielderName: 'Rabada', description: 'c Rabada b Jansen' } },
+          { playerId: 'p4', name: 'Suryakumar Yadav', runs: 3, balls: 4, fours: 0, sixes: 0, isOut: true, dismissal: { type: 'caught', bowlerName: 'Rabada', fielderName: 'Klaasen', description: 'c Klaasen b Rabada' } },
+          { playerId: 'p5', name: 'Axar Patel', runs: 47, balls: 31, fours: 1, sixes: 4, isOut: true, dismissal: { type: 'run_out', description: 'run out (de Kock)' } },
+          { playerId: 'p6', name: 'Shivam Dube', runs: 27, balls: 16, fours: 3, sixes: 1, isOut: true, dismissal: { type: 'caught', bowlerName: 'Nortje', fielderName: 'Miller', description: 'c Miller b Nortje' } },
+          { playerId: 'p7', name: 'Hardik Pandya', runs: 5, balls: 2, fours: 1, sixes: 0, isOut: false },
+          { playerId: 'p8', name: 'Ravindra Jadeja', runs: 2, balls: 2, fours: 0, sixes: 0, isOut: true, dismissal: { type: 'caught', bowlerName: 'Nortje', fielderName: 'Stubbs', description: 'c Stubbs b Nortje' } },
+        ],
+        bowling: [
+          { playerId: 'p40', name: 'Marco Jansen', oversBowled: 4, legalBalls: 24, maidens: 0, runsConceded: 49, wickets: 1, wides: 1, noBalls: 0 },
+          { playerId: 'p41', name: 'Keshav Maharaj', oversBowled: 3, legalBalls: 18, maidens: 0, runsConceded: 23, wickets: 2, wides: 0, noBalls: 0 },
+          { playerId: 'p42', name: 'Kagiso Rabada', oversBowled: 4, legalBalls: 24, maidens: 0, runsConceded: 36, wickets: 1, wides: 2, noBalls: 0 },
+          { playerId: 'p43', name: 'Anrich Nortje', oversBowled: 4, legalBalls: 24, maidens: 0, runsConceded: 26, wickets: 2, wides: 0, noBalls: 0 },
+          { playerId: 'p44', name: 'Tabraiz Shamsi', oversBowled: 3, legalBalls: 18, maidens: 0, runsConceded: 26, wickets: 0, wides: 1, noBalls: 0 },
+          { playerId: 'p36', name: 'Aiden Markram', oversBowled: 2, legalBalls: 12, maidens: 0, runsConceded: 16, wickets: 0, wides: 0, noBalls: 0 },
+        ],
+        fallOfWickets: [
+          { wicketNumber: 1, score: 23, overs: '1.4', batsmanName: 'Rohit Sharma' },
+          { wicketNumber: 2, score: 23, overs: '1.6', batsmanName: 'Shubman Gill' },
+          { wicketNumber: 3, score: 34, overs: '4.3', batsmanName: 'Suryakumar Yadav' },
+          { wicketNumber: 4, score: 106, overs: '13.3', batsmanName: 'Axar Patel' },
+          { wicketNumber: 5, score: 163, overs: '18.5', batsmanName: 'Virat Kohli' },
+          { wicketNumber: 6, score: 174, overs: '19.4', batsmanName: 'Shivam Dube' },
+          { wicketNumber: 7, score: 176, overs: '20.0', batsmanName: 'Ravindra Jadeja' },
+        ],
+        extras: { wides: 4, noBalls: 0, byes: 1, legByes: 0, penalty: 0, total: 5 },
+        recentBalls: [],
+      },
+      {
+        teamId: 'team-sa',
+        teamName: 'South Africa Proteas',
+        runs: 151,
+        wickets: 5,
+        legalBalls: 96, // 16.0 overs completed
+        batting: [
+          { playerId: 'p34', name: 'Quinton de Kock', runs: 39, balls: 31, fours: 4, sixes: 1, isOut: true, dismissal: { type: 'caught', bowlerName: 'Arshdeep', fielderName: 'Kuldeep', description: 'c Kuldeep b Arshdeep' } },
+          { playerId: 'p35', name: 'Reeza Hendricks', runs: 4, balls: 5, fours: 1, sixes: 0, isOut: true, dismissal: { type: 'bowled', bowlerName: 'Bumrah', description: 'b Bumrah' } },
+          { playerId: 'p36', name: 'Aiden Markram', runs: 4, balls: 5, fours: 1, sixes: 0, isOut: true, dismissal: { type: 'caught', bowlerName: 'Arshdeep', fielderName: 'Pant', description: 'c Pant b Arshdeep' } },
+          { playerId: 'p39', name: 'Tristan Stubbs', runs: 31, balls: 21, fours: 3, sixes: 1, isOut: true, dismissal: { type: 'bowled', bowlerName: 'Axar', description: 'b Axar' } },
+          { playerId: 'p37', name: 'Heinrich Klaasen', runs: 52, balls: 27, fours: 2, sixes: 5, isOut: true, dismissal: { type: 'caught', bowlerName: 'Hardik', fielderName: 'Pant', description: 'c Pant b Hardik' } },
+          { playerId: 'p38', name: 'David Miller', runs: 17, balls: 14, fours: 1, sixes: 1, isOut: false },
+          { playerId: 'p40', name: 'Marco Jansen', runs: 2, balls: 3, fours: 0, sixes: 0, isOut: false },
+        ],
+        bowling: [
+          { playerId: 'p10', name: 'Jasprit Bumrah', oversBowled: 3, legalBalls: 18, maidens: 0, runsConceded: 16, wickets: 1, wides: 0, noBalls: 0 },
+          { playerId: 'p11', name: 'Mohammed Siraj', oversBowled: 3, legalBalls: 18, maidens: 0, runsConceded: 28, wickets: 0, wides: 1, noBalls: 0 },
+          { playerId: 'p8', name: 'Axar Patel', oversBowled: 4, legalBalls: 24, maidens: 0, runsConceded: 49, wickets: 1, wides: 0, noBalls: 0 },
+          { playerId: 'p9', name: 'Kuldeep Yadav', oversBowled: 3, legalBalls: 18, maidens: 0, runsConceded: 32, wickets: 0, wides: 1, noBalls: 0 },
+          { playerId: 'p6', name: 'Hardik Pandya', oversBowled: 3, legalBalls: 18, maidens: 0, runsConceded: 20, wickets: 1, wides: 0, noBalls: 0 },
+        ],
+        fallOfWickets: [
+          { wicketNumber: 1, score: 7, overs: '1.3', batsmanName: 'Reeza Hendricks' },
+          { wicketNumber: 2, score: 12, overs: '2.3', batsmanName: 'Aiden Markram' },
+          { wicketNumber: 3, score: 70, overs: '8.5', batsmanName: 'Tristan Stubbs' },
+          { wicketNumber: 4, score: 106, overs: '12.3', batsmanName: 'Quinton de Kock' },
+          { wicketNumber: 5, score: 151, overs: '16.1', batsmanName: 'Heinrich Klaasen' },
+        ],
+        extras: { wides: 4, noBalls: 0, byes: 1, legByes: 1, penalty: 0, total: 6 },
+        recentBalls: [
+          { id: 'b1', ballNumberInOver: 1, overNumber: 16, runsScored: 0, isLegal: true, isExtra: false, extraRuns: 0, isWicket: true, dismissalType: 'caught', strikerId: 'p37', nonStrikerId: 'p38', bowlerId: 'p6', strikerName: 'Heinrich Klaasen', bowlerName: 'Hardik Pandya', commentary: 'OUT! Edge behind to the keeper! Big wicket for India!', label: 'W' },
+          { id: 'b2', ballNumberInOver: 2, overNumber: 16, runsScored: 0, isLegal: true, isExtra: false, extraRuns: 0, isWicket: false, strikerId: 'p40', nonStrikerId: 'p38', bowlerId: 'p6', strikerName: 'Marco Jansen', bowlerName: 'Hardik Pandya', commentary: 'Beaten outside off stump with extra bounce.', label: '0' },
+          { id: 'b3', ballNumberInOver: 3, overNumber: 16, runsScored: 1, isLegal: true, isExtra: false, extraRuns: 0, isWicket: false, strikerId: 'p40', nonStrikerId: 'p38', bowlerId: 'p6', strikerName: 'Marco Jansen', bowlerName: 'Hardik Pandya', commentary: 'Tucked away towards fine leg for a single.', label: '1' },
+          { id: 'b4', ballNumberInOver: 4, overNumber: 16, runsScored: 1, isLegal: true, isExtra: false, extraRuns: 0, isWicket: false, strikerId: 'p38', nonStrikerId: 'p40', bowlerId: 'p6', strikerName: 'David Miller', bowlerName: 'Hardik Pandya', commentary: 'Pushed to deep cover for one.', label: '1' },
+          { id: 'b5', ballNumberInOver: 5, overNumber: 16, runsScored: 1, isLegal: true, isExtra: false, extraRuns: 0, isWicket: false, strikerId: 'p40', nonStrikerId: 'p38', bowlerId: 'p6', strikerName: 'Marco Jansen', bowlerName: 'Hardik Pandya', commentary: 'Steered down to third man.', label: '1' },
+          { id: 'b6', ballNumberInOver: 6, overNumber: 16, runsScored: 1, isLegal: true, isExtra: false, extraRuns: 0, isWicket: false, strikerId: 'p38', nonStrikerId: 'p40', bowlerId: 'p6', strikerName: 'David Miller', bowlerName: 'Hardik Pandya', commentary: 'Drives to long-off to retain the strike.', label: '1' },
+        ],
+      },
+    ],
+    currentStrikerId: 'p38', // David Miller
+    currentNonStrikerId: 'p40', // Marco Jansen
+    currentBowlerId: 'p10', // Jasprit Bumrah coming on for over 17!
+    target: 177,
+    resultMessage: 'South Africa need 26 runs in 24 balls',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'match-comp-2',
+    title: 'Super League Semi-Final',
+    venue: 'Melbourne Cricket Ground, Melbourne',
+    format: 'T20',
+    totalOvers: 20,
+    team1: DEFAULT_TEAMS[1], // AUS
+    team2: DEFAULT_TEAMS[2], // ENG
+    tossWinnerId: 'team-eng',
+    tossDecision: 'bowl',
+    status: 'completed',
+    currentInningsIndex: 1,
+    innings: [
+      {
+        teamId: 'team-aus',
+        teamName: 'Australia Thunder',
+        runs: 201,
+        wickets: 7,
+        legalBalls: 120,
+        batting: [
+          { playerId: 'p12', name: 'Travis Head', runs: 34, balls: 18, fours: 2, sixes: 3, isOut: true },
+          { playerId: 'p13', name: 'David Warner', runs: 39, balls: 16, fours: 2, sixes: 4, isOut: true },
+          { playerId: 'p14', name: 'Mitchell Marsh', runs: 35, balls: 25, fours: 2, sixes: 2, isOut: true },
+          { playerId: 'p15', name: 'Glenn Maxwell', runs: 28, balls: 25, fours: 1, sixes: 1, isOut: true },
+          { playerId: 'p16', name: 'Marcus Stoinis', runs: 30, balls: 17, fours: 2, sixes: 2, isOut: true },
+        ],
+        bowling: [
+          { playerId: 'p31', name: 'Jofra Archer', oversBowled: 4, legalBalls: 24, maidens: 0, runsConceded: 28, wickets: 3, wides: 1, noBalls: 0 },
+          { playerId: 'p32', name: 'Adil Rashid', oversBowled: 4, legalBalls: 24, maidens: 0, runsConceded: 38, wickets: 1, wides: 0, noBalls: 0 },
+        ],
+        fallOfWickets: [],
+        extras: { wides: 6, noBalls: 1, byes: 0, legByes: 2, penalty: 0, total: 9 },
+        recentBalls: [],
+      },
+      {
+        teamId: 'team-eng',
+        teamName: 'England Titans',
+        runs: 165,
+        wickets: 6,
+        legalBalls: 120,
+        batting: [
+          { playerId: 'p23', name: 'Jos Buttler', runs: 42, balls: 28, fours: 5, sixes: 2, isOut: true },
+          { playerId: 'p24', name: 'Phil Salt', runs: 37, balls: 23, fours: 4, sixes: 2, isOut: true },
+          { playerId: 'p27', name: 'Harry Brook', runs: 20, balls: 16, fours: 2, sixes: 0, isOut: false },
+        ],
+        bowling: [
+          { playerId: 'p19', name: 'Pat Cummins', oversBowled: 4, legalBalls: 24, maidens: 0, runsConceded: 23, wickets: 2, wides: 0, noBalls: 0 },
+          { playerId: 'p21', name: 'Adam Zampa', oversBowled: 4, legalBalls: 24, maidens: 0, runsConceded: 28, wickets: 2, wides: 1, noBalls: 0 },
+        ],
+        fallOfWickets: [],
+        extras: { wides: 3, noBalls: 0, byes: 1, legByes: 1, penalty: 0, total: 5 },
+        recentBalls: [],
+      },
+    ],
+    currentStrikerId: 'p27',
+    currentNonStrikerId: 'p28',
+    currentBowlerId: 'p19',
+    target: 202,
+    resultMessage: 'Australia Thunder won by 36 runs',
+    createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+  },
+];

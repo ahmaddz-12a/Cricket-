@@ -1,0 +1,6 @@
+{
+  "name": "FX Cricket Score",
+  "description": "Professional ball-by-ball cricket scoring application with live scorecards, match statistics, team management, and match history.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
