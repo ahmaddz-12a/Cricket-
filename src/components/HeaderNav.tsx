@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCricket } from '../context/CricketContext';
 import {
   Flame,
@@ -12,6 +12,10 @@ import {
   Moon,
   Volume2,
   VolumeX,
+  Download,
+  Smartphone,
+  CheckCircle,
+  X,
 } from 'lucide-react';
 
 export const HeaderNav: React.FC = () => {
@@ -24,6 +28,8 @@ export const HeaderNav: React.FC = () => {
     soundEnabled,
     setSoundEnabled,
   } = useCricket();
+
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
 
   const navItems = [
     { id: 'live', label: 'Live Scoring', icon: Radio },
@@ -86,6 +92,16 @@ export const HeaderNav: React.FC = () => {
           {/* Right Action Utilities */}
           <div className="flex items-center space-x-2">
             <button
+              id="download-app-btn"
+              onClick={() => setShowDownloadModal(true)}
+              title="Download App or Source Code"
+              className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-bold transition-colors"
+            >
+              <Download className="h-4 w-4" />
+              <span className="hidden sm:inline">Download</span>
+            </button>
+
+            <button
               id="sound-toggle-btn"
               onClick={() => setSoundEnabled(!soundEnabled)}
               title={soundEnabled ? 'Mute Sounds' : 'Enable Sounds'}
@@ -139,6 +155,97 @@ export const HeaderNav: React.FC = () => {
           );
         })}
       </nav>
+      {/* Download / Install Modal */}
+      {showDownloadModal && (
+        <div
+          id="download-modal-backdrop"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm animate-in fade-in duration-200"
+        >
+          <div
+            id="download-modal-content"
+            className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-2xl space-y-5"
+          >
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div className="flex items-center space-x-2.5">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400">
+                  <Download className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-white">Download & Install</h3>
+                  <p className="text-xs text-slate-400">Get offline code or install on phone</p>
+                </div>
+              </div>
+              <button
+                id="close-download-modal-btn"
+                onClick={() => setShowDownloadModal(false)}
+                className="rounded-lg p-1 text-slate-400 hover:bg-slate-800 hover:text-white"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Option 1: Direct ZIP download */}
+            <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-4 space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <Download className="h-4 w-4 text-emerald-400" />
+                  <span className="text-sm font-bold text-white">Source Code (.ZIP)</span>
+                </div>
+                <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded-full">
+                  168 KB
+                </span>
+              </div>
+              <p className="text-xs text-slate-300">
+                Complete React + TypeScript + Tailwind project ready to run locally with `npm run dev`.
+              </p>
+              <a
+                id="direct-download-zip-link"
+                href="/fx-cricket-score.zip"
+                download="fx-cricket-score.zip"
+                className="mt-2 flex items-center justify-center space-x-2 w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors shadow-lg shadow-emerald-500/20"
+              >
+                <Download className="h-4 w-4 stroke-[2.5]" />
+                <span>Download fx-cricket-score.zip</span>
+              </a>
+            </div>
+
+            {/* Option 2: Mobile App Install */}
+            <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4 space-y-2.5">
+              <div className="flex items-center space-x-2">
+                <Smartphone className="h-4 w-4 text-sky-400" />
+                <span className="text-sm font-bold text-white">Install on Mobile (Android / iOS)</span>
+              </div>
+              <ul className="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
+                <li>
+                  <strong className="text-slate-200">Android (Chrome):</strong> Tap menu (⋮) &gt; <span className="text-emerald-400 font-semibold">"Install App"</span> or <span className="text-emerald-400 font-semibold">"Add to Home screen"</span>.
+                </li>
+                <li>
+                  <strong className="text-slate-200">iPhone (Safari):</strong> Tap Share (<span className="text-slate-200">↑</span>) &gt; <span className="text-emerald-400 font-semibold">"Add to Home Screen"</span>.
+                </li>
+              </ul>
+              <button
+                id="copy-share-url-btn"
+                onClick={() => {
+                  navigator.clipboard.writeText(window.location.href);
+                  alert('App link copied to clipboard!');
+                }}
+                className="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs transition-colors flex items-center justify-center space-x-1.5"
+              >
+                <CheckCircle className="h-3.5 w-3.5 text-sky-400" />
+                <span>Copy App URL</span>
+              </button>
+            </div>
+
+            <button
+              id="dismiss-download-modal-btn"
+              onClick={() => setShowDownloadModal(false)}
+              className="w-full py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
